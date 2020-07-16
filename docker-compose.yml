@@ -1,0 +1,10 @@
+---
+
+version: "3.8"
+
+services:
+  bind:
+    build: ./bind
+    ports:
+      - "54:5353/udp"
+      - "54:5353/tcp"
