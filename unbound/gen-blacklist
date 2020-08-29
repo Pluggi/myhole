@@ -1,0 +1,29 @@
+#!/usr/bin/env python3
+
+import urllib.request
+
+domains = {}
+
+with urllib.request.urlopen("https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts") as response:
+    body = response.read().decode().splitlines()
+
+    for line in body:
+        # Remove comments
+        position = line.find("#")
+        if position != -1:
+            line = line[:position]
+
+        if not line.strip():
+            continue
+
+        try:
+            addr, hostname = line.split()
+        except Exception as e:
+            print(e, "'{}'".format(line))
+            break
+
+        # Filter out useless entries
+        if addr != "0.0.0.0" or hostname == "0.0.0.0":
+            continue
+
+        print("""local-zone: "{}" always_nxdomain""".format(hostname))
