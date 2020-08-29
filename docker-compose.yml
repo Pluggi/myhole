@@ -6,6 +6,6 @@ services:
   unbound:
     image: pluggi/unbound:latest
     ports:
-      - "54:5353/udp"
-      - "54:5353/tcp"
+      - "53:5353/udp"
+      - "53:5353/tcp"
     restart: unless-stopped
