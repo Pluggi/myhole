@@ -1,6 +1,6 @@
 ---
 
-name: build unbound
+name: build images
 
 on:
   push:
@@ -26,10 +26,18 @@ jobs:
       - name: make blacklist
         run: make blacklist
 
-      - name: build the image
+      - name: build unbound
         run: |
           docker buildx build \
             --tag pluggi/unbound:latest \
             --platform linux/amd64,linux/arm/v7 \
             --push \
             unbound/
+
+      - name: build dhcpd
+        run: |
+          docker buildx build \
+            --tag pluggi/dhcpd:latest \
+            --platform linux/amd64,linux/arm/v7 \
+            --push \
+            dhcpd/

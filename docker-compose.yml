@@ -9,3 +9,8 @@ services:
       - "53:5353/udp"
       - "53:5353/tcp"
     restart: unless-stopped
+
+  dhcpd:
+    image: pluggi/dhcpd:latest
+    net: host
+    restart: unless-stopped
