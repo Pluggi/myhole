@@ -12,5 +12,5 @@ services:
 
   dhcpd:
     image: pluggi/dhcpd:latest
-    net: host
+    network_mode: host
     restart: unless-stopped
