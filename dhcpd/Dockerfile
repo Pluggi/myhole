@@ -7,6 +7,4 @@ RUN apk add --no-cache \
 COPY dhcpd.conf /etc/dhcpd.conf
 COPY docker-entrypoint.sh /usr/bin/docker-entrypoint.sh
 
-USER nobody
-
 CMD ["/usr/bin/docker-entrypoint.sh"]
