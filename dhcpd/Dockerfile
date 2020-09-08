@@ -9,4 +9,4 @@ COPY docker-entrypoint.sh /usr/bin/docker-entrypoint.sh
 
 USER nobody
 
-CMD ["docker-entrypoint.sh"]
+CMD ["/usr/bin/docker-entrypoint.sh"]
