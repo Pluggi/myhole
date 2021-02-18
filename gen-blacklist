@@ -1,8 +1,17 @@
 #!/usr/bin/env python3
 
+import sys
 import urllib.request
 
+if len(sys.argv) < 2:
+    print("Missing output filename")
+    sys.exit(1)
+
+filename = sys.argv[1]
+
 domains = {}
+
+output = []
 
 with urllib.request.urlopen("https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts") as response:
     body = response.read().decode().splitlines()
@@ -26,4 +35,7 @@ with urllib.request.urlopen("https://raw.githubusercontent.com/StevenBlack/hosts
         if addr != "0.0.0.0" or hostname == "0.0.0.0":
             continue
 
-        print("""local-zone: "{}" always_nxdomain""".format(hostname))
+        output.append("""local-zone: "{}" always_nxdomain""".format(hostname))
+
+with open(filename, "w") as f:
+    f.write("\n".join(output))
